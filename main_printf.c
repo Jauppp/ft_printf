@@ -6,7 +6,7 @@
 /*   By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 14:52:14 by cdomet-d          #+#    #+#             */
-/*   Updated: 2023/12/01 14:52:14 by cdomet-d         ###   ########lyon.fr   */
+/*   Updated: 2023/12/13 16:16:54 by cdomet-d         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 
 void test_strc(void)
 {
+    char *str = "Hello";
+    char *s = "";
     printf("\n");
     printf("*＊✿❀ s ❀✿＊* ✦\n");
     printf("== 1 ==\n");
-    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%s\n", ""), ft_printf("%s\n", ""));
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%s", "\u00A1\u00A2\xde\xfe"), ft_printf("%s", "\u00A1\u00A2\xde\xfe"));
     printf("== 2 ==\n");
-    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf(" %s\n", ""), ft_printf(" %s\n", ""));
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%s", ""), ft_printf("%s", ""));
     printf("== 3 ==\n");
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%s \n", ""), ft_printf("%s \n", ""));
     printf("== 4 ==\n");
@@ -31,7 +33,13 @@ void test_strc(void)
     printf("== 5 ==\n");
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf(" %s %s \n", " - ", ""), ft_printf(" %s %s \n", " - ", ""));
     printf("== 6 ==\n");
-    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf(" %s %s %s %s %s\n\n", " - ", "", "4", "", TOLKIEN), ft_printf(" %s %s %s %s %s\n", " - ", "", "4", "", TOLKIEN));
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf(" %s %s %s %s %s\n", " - ", "", "4", "", TOLKIEN), ft_printf(" %s %s %s %s %s\n", " - ", "", "4", "", TOLKIEN));
+    printf("== 7 ==\n");
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("Hel\nlo\n"), ft_printf("Hel\nlo\n"));
+    printf("== 8 ==\n");
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%s\n", str), ft_printf("%s\n", str));
+    printf("%d\n",ft_printf("%s", s));
+	printf("%d\n", printf("%s", s)) ;
     printf("*＊✿❀ c ❀✿＊* ✦\n");
     printf("== 1 ==\n");
     printf("1. return value of printf = %d || %d return value of ft_printf\n\n", printf("pr %c\n", 'a'), ft_printf("ft %c\n", 'a'));
@@ -89,7 +97,7 @@ void test_hexas(void)
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr x = %x\n", INT_MIN), ft_printf("ft x = %x\n", INT_MIN));
     printf("*＊✿❀ x ❀✿＊* ✦\n");
     printf("== 1 ==\n");
-    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr X = %X\n", -95), ft_printf("ft X = %X\n", -95));
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr X = %x\n", -95), ft_printf("ft X = %X\n", -95));
     printf("== 2 ==\n");
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr X = %X %X %X\n", INT_MAX, INT_MIN, -42), ft_printf("ft X = %X %X %X\n", INT_MAX, INT_MIN, -42));
     printf("== 3 ==\n");
@@ -106,17 +114,25 @@ void test_hexas(void)
 
 void test_edgecases(void)
 {
+    char *str = "JRRT";
     printf("\n");
     printf("*＊✿❀ %% ❀✿＊* ✦\n");
     printf("== 1 ==\n");
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr percent sign = %% Manwë and Melkor were brethren in the thought of Ilúvatar\n"), ft_printf("ft percent sign = %% Manwë and Melkor were brethren in the thought of Ilúvatar\n"));
     printf("== 2 ==\n");
     printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%% pr percent sign = %% Thus began the first battle of the Valar with Melkor for the dominion of Arda%%\n"), ft_printf("%% ft percent sign = %% Thus began the first battle of the Valar with Melkor for the dominion of Arda%%\n"));
+    printf("\n");
+    printf("*＊✿❀ MIX ❀✿＊* ✦\n");
+    printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("%c | %d | %s | %x | %p |\n", '0', 0, "Oh hi Mark", 95, str), ft_printf("%c | %d | %s | %x | %p |\n", '0', 0, "Oh hi Mark", 95, str));
 
     // printf("*＊✿❀ stray %% without known flag ❀✿＊* ✦\n");
     // // nb : will not compile with flags;
     // printf("== 1 ==\n");
     // printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr percent sign = Man%wë and %Melkor were brethren in the thought of Ilúvatar\n"), ft_printf("ft percent sign = Man%wë and %Melkor were brethren in the thought of Ilúvatar\n"));
+    // printf("== 2 ==\n");
+    // printf("return value of printf = %d || %d return value of ft_printf\n\n", printf("pr percent sign = %% Thus began the first%"), ft_printf("ft percent sign = %% Thus began the first%"));
+    // printf("== 2 ==\n");
+    // ft_printf("%d\n", "hello");
 }
 
 int main(void)
@@ -125,9 +141,12 @@ int main(void)
     printf("✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦\n");
     printf("\tft_printf tests\n");
     printf("✦ . 　⁺ 　 . ✦ . 　⁺ 　 . ✦\n\n");
-
     test_strc();
     test_digits();
     test_hexas();
     test_edgecases();
+    // char *str = "ewwwww";
+    // setvbuf(stdout, NULL, _IONBF, 0);
+    // close(1);
+    // return(ft_printf("%p %s", str, 0, 0));
 }
